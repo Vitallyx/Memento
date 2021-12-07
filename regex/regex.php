@@ -8,13 +8,6 @@ $regexMajuscule = "/^[A-Z]$/"; // Regex pour avoir au moins une majuscule
 
 $isMajOk = preg_match("/^[A-Z]{1,}$/", $password);
 
-/*
-Au moins une maj
-La petite * dit : on accepte 0 ou plusieurs (majuscules) : les majuscules sont pas obligatoires,
-Le + signifie minimum 1 ou plusieurs (majusucules)
-{1,} Une majuscule minimum et pas de maximum de majuscules
-*/
-
 $isSpecialChars = preg_match("/[\W]/", $password); // vérifier qu'il y a des car spéciaux
 
 $isNumber = preg_match("/[0-9]/", $password); // Au moins un chiffre
