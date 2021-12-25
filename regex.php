@@ -22,11 +22,20 @@ if ($length && $isMajOk) {
 
 
 /* 
-Made by @Valwyns
-► Pour rechercher un élément en particulier : ctrl + f et écrire # + le Métacaractère voulu ex : #^
+Made by BMuller-dev alias @Valwyns
 
+Veuillez lire les notes pour mieux comprendre la structure du mémento 
+
+ Note : 
+► Pour rechercher un élément en particulier : ctrl + f et écrire # + le Métacaractère voulu ex : #^
+► Dans les exemples les () viennent indiquer ce qui est sélectionné
+
+ Site utile : 
+► https://regex101.com - Testeur de regex en ligne
 
  Structure :
+"/^ REGEX $/"
+
 
  ^ Début du regex
  $ Fin du regex
@@ -34,45 +43,89 @@ Made by @Valwyns
  () Ensemble qui va être tester
 
 
- a{x} Exactement x nombre de caractères de a
 
- a{x,} x ou plus que a
 
- a{x,x} Entre x et x de a
+ Les Métacaractère :
 
 ╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 ║► Tag : #^
 ╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║ Inséré dans une classe, le caractère ^ indique une exception pour la recherche
-║   [^n] correspond à tout caractère, sauf n
+║ Inséré dans une classe, le caractère ^ indique une exception pour la recherche 
+║   [^n]  tout caractère, sauf n  ←−→ (fzaff)n(gez)n(fez)
 ║
-║ En dehours d'une classe elle établit une correspondance avec des caractères au début d’une chaîne de caractères
-║   ^https correspond à https:test.com, mais pas à www.test.com
+║ En dehors d'une classe elle établit une correspondance avec des caractères au début d’une chaîne de caractères 
+║   ^https  commence par https ←−→ (https):test.com ; (https)fzafaz ; www.test.com
+║
+║Remarque : 
+║► Seulement ^ est actifs dans une classe, les autres métacaractères ne sont considérés que comme simples caractères
 ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 ║► Tag : #$
 ╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 ║ Établit une correspondance avec des caractères à la fin d’une chaîne de caractères
-║
-║
-║
-║
+║   abc$  termine par abc ←−→ fzaf(abc) ; fzafabh
+║   [xyz]$  termine par x, y ou z ←−→ faghex(z) ; fafzae(y) ; gezgzh 
 ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║► Tag : #\S, #\s, #\w
+║► Tag : #\S, #\s, #\w, #\W, #\D, #\d, 
 ╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 ║\S	Correspond à tous les caractères qui ne sont pas des caractères d’espacement
-║   Va\Slwyns correspond à VaXlwyns et à Va1lwyns mais pas a Va lwyns
+║   Va\Slwyns  Va suivi de tous caractères hors caractères d’espacement ←−→ (VaXlwyns)fz ; fza(Va1lwyns)s ; Va lwyns
+║
 ║\s Correspond à tout caractère d’espacement (espace, tabulation, saut de ligne ou saut de page)
-║   Valwyns\sdev correspond à Valwyns dev et à Valwyns(tab)dev, mais pas à Valwyns<2 espaces>dev ni à Valwynsdev
+║   Valwyns\sdev  Valwyns suivi d'un caractère d’espacement puis dev ←−→ Valwyns dev ; (Valwyns[tab]dev)dz ; Valwyns<2 espaces>dev ; Valwynsdev ; Valwzyns dev
 ║
 ║\w Correspond à n’importe quel caractère alphanumérique
-║   \w\w\w correspond à daz, gez et FfzafD
+║   \w\w\w  sélectionne par bloc de 3 caractères alphanumérique ←−→ (daz) ; (gez)(gze) ; (Ffz)1D ici Ffz est sélectionné mais pas 1D car il n'y a que 2 caractères
+║   ab\w\w\w  ab suivi de 3 caractères alphanumérique ←−→ faf(abfzd)htr
+║
 ║\W	Correspond à n’importe quel caractère non alphanumérique
-║   valwyns\W correspond à valwyns! et valwyns?
+║   valwyns\W  valwyns suivi de n’importe quel caractère non alphanumérique ←−→ (valwyns!) ; (valwyns?)
+║
+║\d	Correspond à tout chiffre
+║   abc\d\d  abc suivi de 2 chiffres ←−→ (abc80) ; (abc90) ; abc4z ; aev52
+║
+║\D	Correspond à tout caractère qui n’est pas un chiffre
+║   abc\D  abc suivi d'un caractère qui n’est pas un chiffre ←−→ (abc!) ; (abc-). ; (abce). ; abfaabc1e
+║
+║\a	Correspond à tout caractère alphabétique, majuscule ou minuscule
+║   n\arz n suivi d'un caractère alphabétique puis de rz ←−→ (nWrz)dz ; (nfrz)fs ; (narz).
+║
+║\b	Définit une limite de mot
+║
+║\B	Définit une non-limite de mot
+║
+║
+║
+║
+║
+║
 ║
 ╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+ 
+ Exemple de Regex :
 
+ [net$] Correspond à n’importe lequel des caractères n, e, t ou $ ($ est un métacaractère, mais dans une classe de caractères, il ne correspond qu’à $).
+
+ [A-Z]$ Doit se terminer par une Majuscule
+
+ [^test]$ Tous caractères sauf t,e,s,t a la fin
+
+ [test]$ Correspond à n’importe lequel des caractères t, e, s, t a la fin
+
+ net[wrx] Correspond à netw, netr et netx, mais pas à netz
+
+ net[a-z] correspond à neta, netw et netf etc, mais pas à net1
+
+ [abc].$ termine par a, b ou c suivi de n'importe quels caractères ←−→ fzafb1, fzafbh, jjytcg
+
+ ^Val.*Dev$ commence par Val, peut avoir 0 ou plusieurs caractères (n'importe lesquels), doit se terminer par Dev ←−→ Valfza44fas5Dev
+
+ [^a]$ Ne doit pas se terminer par a ←−→ fzafb(1) ; feD1 zan
+
+
+
+ A trier
 
  \D Tous les caractères hors chiffre \d Tous les chiffres
  \W Tous les caractères non alphanumérique - \w Tous les caractères alphanumérique
@@ -95,8 +148,12 @@ Made by @Valwyns
  [abc] 1 caractère parmi a,b ou c
 
 
+ a{x} Exactement x nombre de caractères de a
 
- Métacaractère :
+ a{x,} x ou plus que a
+
+ a{x,x} Entre x et x de a
+
 
 
  ? Facultative peut apparaître 0 ou 1 fois - ? revient à écrire {0,1}
@@ -134,33 +191,6 @@ Made by @Valwyns
 
  ?= Créer un nouveau ensemble
 
-
- Exemple de Regex :
-
-
- [net$] Correspond à n’importe lequel des caractères n, e, t ou $ ($ est un métacaractère, mais dans une classe de caractères, il ne correspond qu’à $).
-
- [A-Z]$ Doit se terminer par une Majuscule
-
- [^test]$ Tous caractères sauf t,e,s,t a la fin
-
- [test]$ Correspond à n’importe lequel des caractères t, e, s, t a la fin
-
- net[wrx] Correspond à netw, netr et netx, mais pas à netz
-
- net[a-z] correspond à neta, netw et netf etc, mais pas à net1
-
-
-
-
-║
-║
-║
-║
-║
-║
-║
-║
 
 
 
