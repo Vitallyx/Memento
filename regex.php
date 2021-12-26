@@ -67,7 +67,7 @@ Veuillez lire les notes pour mieux comprendre la structure du mémento
 ║   [xyz]$  termine par x, y ou z ←−→ faghex(z) ; fafzae(y) ; gezgzh 
 ║
 ╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-║► Tag : #\S, #\s, #\w, #\W, #\D, #\d, 
+║► Tag : #\S, #\s, #\w, #\W, #\D, #\d, #\a, #\b, #\B
 ╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 ║\S	Correspond à tous les caractères qui ne sont pas des caractères d’espacement
 ║   Va\Slwyns  Va suivi de tous caractères hors caractères d’espacement ←−→ (VaXlwyns)fz ; fza(Va1lwyns)s ; Va lwyns
@@ -89,18 +89,19 @@ Veuillez lire les notes pour mieux comprendre la structure du mémento
 ║   abc\D  abc suivi d'un caractère qui n’est pas un chiffre ←−→ (abc!) ; (abc-). ; (abce). ; abfaabc1e
 ║
 ║\a	Correspond à tout caractère alphabétique, majuscule ou minuscule
-║   n\arz n suivi d'un caractère alphabétique puis de rz ←−→ (nWrz)dz ; (nfrz)fs ; (narz).
+║   n\arz  n suivi d'un caractère alphabétique puis de rz ←−→ (nWrz)dz ; (nfrz)fs ; (narz).
 ║
 ║\b	Définit une limite de mot
+║   \bval  aucun caractère avant val ←−→ (val) ; (val)he ; ndzawval.
 ║
 ║\B	Définit une non-limite de mot
+║   \Bval  au moins 1 caractère avant val ←−→ ktyew(val)fza ; dzad(val)kty ; valgzeg ; f(val)fez
 ║
+║\f	Correspond à un caractère saut de page
 ║
+║\n	Correspond à un caractère de retour à la ligne
 ║
-║
-║
-║
-║
+║ 
 ╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
  
  Exemple de Regex :
@@ -123,7 +124,7 @@ Veuillez lire les notes pour mieux comprendre la structure du mémento
 
  [^a]$ Ne doit pas se terminer par a ←−→ fzafb(1) ; feD1 zan
 
-
+\b[0-9A-Z]{3}([^ 0-9A-Z]|\s)?[0-9]{4}\b
 
  A trier
 
