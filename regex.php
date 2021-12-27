@@ -40,8 +40,8 @@ Veuillez lire les notes pour mieux comprendre la structure du mémento
  ^ Début du regex
  $ Fin du regex
  [] Établit une correspondance avec tout ce qui se trouve à l’intérieur des crochets.
- () Ensemble qui va être tester
-
+ {} Permettent de regrouper un ensemble de commandes et de les exécuter dans le "shell courant"
+ () Permettent de regrouper un ensemble de commandes et de les exécuter dans un "shell fils".
 
 
 
@@ -147,11 +147,46 @@ Veuillez lire les notes pour mieux comprendre la structure du mémento
 ║
 ║\H Corresponds à tous les caractères qui ne sont pas des blanc honrizontaux
 ║
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║► Tag : #\
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║Annihile la signification du métacaractère qui suit
+║
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║► Tag : #.
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║. Désigne un caractère quelconque / Correspond à tout caractère unique
+║
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║► Tag : #*
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║* Facultative peut apparaître 0 ou plusieurs fois - * revient à écrire {0,}
+║   Va*  Va suivi de 0 a ou de plusieurs a ←−→ (Vaaaaaaaaa) ; faz(Vaa)ffza(Vaaaaa) ; (Va)fafahe
+║
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║► Tag : #?
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║? Facultative peut apparaître 0 ou 1 fois - ? revient à écrire {0,1}
+║   Va?l  Va suivi de 0 a ou 1 a puis de l ←−→ (Val)gagh ; faz(Val)ffza(Vl)fza ; Vaalfafahe
+║
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║► Tag : #+
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║+ Obligatoire peut apparaître 1 ou plusieurs fois - + revient à écrire {1,}
+║   Va+  Va suivi obligatoirement de 1 a ou de plusieurs a ←−→ (Vaaaaaaaaa) ; faz(Vaa)ffza(Vaaaaa) ; Vafafahe
+║
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║► Tag : #|
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║| Corresponds à ou
+║
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║► Tag : #-
+╠═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+║- Correspond à tout caractère compris dans la plage spécifiée.
+║   [a-z]  correspond à tout caractère alphabétique en minuscule de l'alphabet
+║
 ╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
-
-
-
-
 
 
  Exemple de Regex :
@@ -176,46 +211,6 @@ Veuillez lire les notes pour mieux comprendre la structure du mémento
 
 \b[0-9A-Z]{3}([^ 0-9A-Z]|\s)?[0-9]{4}\b
 
- A trier
-
- 
-  [A-Z] Au moins 1 Majuscule
-
- [a-z] Minuscule
-
- [0-9] Chiffre
-
- [^val] Tous les caractères sauf a, b ou c
-
- [val] 1 caractère parmi a,b ou c
-
-
- a{x} Exactement x nombre de caractères de a
-
- a{x,} x ou plus que a
-
- a{x,x} Entre x et x de a
-
-
-
- ? Facultative peut apparaître 0 ou 1 fois - ? revient à écrire {0,1}
-
- + Obligatoire peut apparaître 1 ou plusieurs fois - + revient à écrire {1,}
-
- * Facultative peut apparaître 0 ou plusieurs fois - * revient à écrire {0,}
-
- a-b Tous les caractères dans la "tranché" de a et b
-
-
- . Représente n’importe quel caractère
-
-
-
-
-
-
- * com$ correspond à www.Valwyns.com ou à télécom, mais pas à communication.
-
 
 
  : if 
@@ -232,9 +227,6 @@ Veuillez lire les notes pour mieux comprendre la structure du mémento
  ?: Précedent
 
  ?= Créer un nouveau ensemble
-
-
-
 
 
  */
