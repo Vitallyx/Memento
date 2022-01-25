@@ -22,7 +22,7 @@ if ($length && $isMajOk) {
 
 
 /* 
-Made by BMuller-dev alias @Valwyns
+Made by BMuller-dev alias @Vitallyx
 
 Veuillez lire les notes pour mieux comprendre la structure du mémento 
 
